@@ -43,8 +43,10 @@ while(k<=length(searches)){
 }
 
 ## download monthly hit volume scores for the same period ##
-period <- c(as.character(start.date) , as.character(end.date))
-period
+
+## this part is necessary if period is greater than 90 days, otherwise skip it ## 
+
+period <- c(as.character(start.date) , as.character(end.date))  
 
 searchesmonthly <- gtrends(keyword = "stock market" ,
                            geo = "US" ,
@@ -72,4 +74,5 @@ dates <- seq(as.Date("2007-01-01") , length = length(hits.f) , by = "days")
 hits.f <- as.xts(hits.f , order.by = dates)/max(hits.f)
 plot(hits.f)
 
+write.csv("ghits.csv")     ## write hit data into a csv file
 ##############################################
